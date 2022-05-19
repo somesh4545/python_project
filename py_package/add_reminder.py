@@ -2,6 +2,9 @@ import os
 import datetime
 import time
 from threading import Timer
+from plyer import notification
+
+reminder_title = []
 
 def validateTime(reminderTime):
     now = datetime.datetime.now()
@@ -13,8 +16,17 @@ def validateTime(reminderTime):
         print("Invalid reminder time")
         return False
 
-def myJob():
-    print("Hello world")
+def sendNotification():
+    title = reminder_title[0]
+    reminder_title.pop(0)
+    dirname = os.path.dirname(__file__)
+    filepath = os.path.join(dirname, '../assets/logo.ico')
+    notification.notify(
+            title = title,
+            message="This is a notification message from task manager" ,
+            app_name="Task Manager",
+            app_icon = filepath
+    )
     pass
 
 def addReminderToFile(userName, title, reminderTime):
@@ -25,7 +37,8 @@ def addReminderToFile(userName, title, reminderTime):
     time_in_minute = hour_diff*60 + minute_diff
 
     # time.sleep(time_in_minute*60)
-    t = Timer(time_in_minute*60, myJob)
+    reminder_title.append(title)
+    t = Timer(time_in_minute*60, sendNotification)
     t.start()
     # print("Reminder time")
     pass

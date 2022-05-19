@@ -15,9 +15,18 @@ def login():
     else:
         loginPassword = input("Password: ")
         f = open(filepath, 'r')
-        storedPassword = f.readlines(0)[1]
+        fileData = f.readlines()
+        modifiedFileData = []
+
+        for data in fileData:
+            modifiedFileData.append(data.replace("\n", ""))
+
+        storedUserName = modifiedFileData[0]
+        storedPassword = modifiedFileData[1]
+
         f.close()
-        if(storedPassword == loginPassword):
+        
+        if(loginUserName == storedUserName and storedPassword == loginPassword):
             respo = 0
             print("\nYou can perform following tasks here: ")
             
@@ -39,5 +48,5 @@ def login():
                 elif(respo == 6):
                     print("Exit")   
         else:
-            print("Wrong password, please try again")
+            print("Wrong credentials, please try again")
             login()
