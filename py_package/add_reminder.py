@@ -8,7 +8,6 @@ reminder_title = []
 
 def validateTime(reminderTime):
     now = datetime.datetime.now()
-    # print(now.hour, " ", now.minute)
     if(now.hour <= reminderTime.hour and now.minute <= reminderTime.minute):
         # print("Proper reminder time")
         return True
@@ -57,6 +56,5 @@ def add_reminder(userName):
         else:
             pass
 
-        print(reminder_time)
     except Exception as e:
         print("Please enter proper time ", e)

@@ -22,5 +22,5 @@ def add_task(userName):
         f.write("\nTask" +str(getNewId) +" ID : "+ str(getNewId)) 
     f.write("\nTask" +str(getNewId) +" Title : " + taskTitle)
     f.write("\nTask" +str(getNewId) + " Deadline : " + taskDeadline)
-
+    print("Task created with id: "+getNewId)
     f.close()
